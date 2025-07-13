@@ -24,7 +24,7 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256, getSigningKey()).compact();
     }
 
-    private String generateToken(UserDetails details) {
+    public String generateToken(UserDetails details) {
         return generatetoken(new HashMap<>(), details);
     }
 
