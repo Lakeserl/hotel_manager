@@ -42,7 +42,16 @@ public class AuthServiceImp implements AuthService {
         if(userRepository.findFirstByEmail(signupReq.getEmail()).isPresent()){
             throw new EntityExistsException("User already Present with email" + signupReq.getEmail());
         }
-
+        // Confirm password validation
+        if (signupReq.getPassword() == null || signupReq.getConfirmPassword() == null ||
+            !signupReq.getPassword().equals(signupReq.getConfirmPassword())) {
+            throw new IllegalArgumentException("Password and Confirm Password do not match");
+        }
+        // Password strength validation: min 6 chars, at least 1 letter and 1 number
+        String password = signupReq.getPassword();
+        if (password.length() < 6 || !password.matches(".*[A-Za-z].*") || !password.matches(".*\\d.*")) {
+            throw new IllegalArgumentException("Password must be at least 6 characters and contain at least one letter and one number");
+        }
         User user = new User();
         user.setEmail(signupReq.getEmail());
         user.setName(signupReq.getName());

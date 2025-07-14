@@ -1,14 +1,13 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterModule } from '@angular/router';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NzMenuModule } from 'ng-zorro-antd/menu';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NzLayoutModule, ReactiveFormsModule, BrowserAnimationsModule, FormsModule, BrowserModule],
+  imports: [RouterOutlet, RouterModule, NzLayoutModule, ReactiveFormsModule, FormsModule, ReactiveFormsModule, NzMenuModule,NzIconModule],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

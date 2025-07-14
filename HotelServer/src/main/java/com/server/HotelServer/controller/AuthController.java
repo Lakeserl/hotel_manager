@@ -44,8 +44,10 @@ public class AuthController {
             return new ResponseEntity<>(createUser, HttpStatus.OK);
         }catch(EntityExistsException entityExistsException){
             return new ResponseEntity<>("User already exists", HttpStatus.NOT_ACCEPTABLE);
+        }catch(IllegalArgumentException illegalArgumentException){
+            return new ResponseEntity<>(illegalArgumentException.getMessage(), HttpStatus.BAD_REQUEST);
         }catch(Exception e){
-            return new ResponseEntity<>("User not created , come again later", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("User not created, try again later", HttpStatus.BAD_REQUEST);
         }
     }
     @PostMapping("/login")

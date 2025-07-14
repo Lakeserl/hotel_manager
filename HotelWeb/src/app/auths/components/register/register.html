@@ -1,0 +1,41 @@
+<div class="center-form">
+    <img src="../../../../assets/logo.png" alt="Logo" class="Logo">
+    <h2>Enter Details to Register</h2>
+    <form nz-form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="custom-form"> 
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your name!">
+                <nz-input-group nzPrefixIcon="idcard">
+                    <input type="text" nz-input formControlName="name" placeholder="Enter your name">
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your email!">
+                <nz-input-group nzPrefixIcon="user">
+                    <input type="text" nz-input formControlName="email" placeholder="Enter email">
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Password!">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input type="password" nz-input formControlName="password" placeholder="Enter password">
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+            <nz-form-control nzErrorTip="Please confirm your Password!">
+                <nz-input-group nzPrefixIcon="lock">
+                    <input type="password" nz-input formControlName="confirmPassword" placeholder="Confirm password">
+                </nz-input-group>
+            </nz-form-control>
+        </nz-form-item>
+
+        <button nz-button nzType="primary" nzBlock [disabled]="registerForm.invalid || loading" [nzLoading]="loading" class="w-100">
+            Register
+        </button>
+    </form>
+</div>
