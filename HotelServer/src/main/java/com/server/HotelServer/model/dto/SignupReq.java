@@ -8,4 +8,5 @@ public class SignupReq {
     private String password;
     private String confirmPassword;
     private String name;
+    private String role; // Thêm trường role để nhận từ client
 }

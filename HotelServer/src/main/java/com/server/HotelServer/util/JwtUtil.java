@@ -36,7 +36,7 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJwt(token).getBody();
+        return Jwts.parser().setSigningKey(getSigningKey()).parseClaimsJws(token).getBody();
     }
 
     public String extractUsername(String token) {
@@ -51,7 +51,7 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-    private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
@@ -61,5 +61,11 @@ public class JwtUtil {
         String SECRET_KEY = "0123456789abcdef0123456789abcdef"; // 32 chars
         byte[] keyBytes = SECRET_KEY.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    public String generateTokenWithRole(UserDetails userDetails, String role) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("role", role);
+        return generatetoken(claims, userDetails);
     }
 }

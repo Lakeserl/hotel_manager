@@ -8,7 +8,11 @@ export const routes: Routes = [
         path: 'admin', 
         children: [
         {
-            path: 'dashboard',
+            path: 'dashboard1',
+            loadComponent: () => import('./features/admin/components/dashboard1/dashboard1').then(m => m.Dashboard1)
+        },
+        {
+                path: 'dashboard',
             loadComponent: () => import('./features/admin/components/dashboard/dashboard').then(m => m.Dashboard)
         },
         {

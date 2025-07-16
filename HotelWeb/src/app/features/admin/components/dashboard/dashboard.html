@@ -1,1 +1,32 @@
-<p>dashboard works!</p>
+<div class="rooms-detail-form-container">
+  <form nz-form [formGroup]="roomDetailsForm" nzLayout="vertical" class="room-details-form" (ngSubmit)="submitForm()">
+    <div class="form-title">Enter Room Details</div>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="24" nzRequired>Room Name</nz-form-label>
+      <nz-form-control [nzSpan]="24">
+        <input nz-input formControlName="name" placeholder="Room Name" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="24" nzRequired>Room Type</nz-form-label>
+      <nz-form-control [nzSpan]="24">
+        <input nz-input formControlName="type" placeholder="Room Type" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="24" nzRequired>Room Price</nz-form-label>
+      <nz-form-control [nzSpan]="24">
+        <input nz-input formControlName="price" placeholder="Room Price" type="number" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control [nzSpan]="24">
+        <button nz-button nzType="primary" [disabled]="roomDetailsForm.invalid" style="width: 100%;">Save</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>

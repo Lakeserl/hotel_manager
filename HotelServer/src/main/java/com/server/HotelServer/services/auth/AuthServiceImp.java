@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,7 +24,7 @@ public class AuthServiceImp implements AuthService {
 
     @PostConstruct
     public void createAnAdminAccount(){
-        Optional<User> adminAccount = userRepository.findByUserRole(UserRole.ADMIN);
+        List<User> adminAccount = userRepository.findByUserRole(UserRole.ADMIN);
         if(adminAccount.isEmpty()){
             User user = new User();
             user.setEmail("admin@test.com");
@@ -55,7 +56,14 @@ public class AuthServiceImp implements AuthService {
         User user = new User();
         user.setEmail(signupReq.getEmail());
         user.setName(signupReq.getName());
-        user.setUserRole(UserRole.CUSTOMER);
+        // Xử lý role từ request, nếu không hợp lệ thì mặc định CUSTOMER
+        UserRole role = UserRole.CUSTOMER;
+        if (signupReq.getRole() != null) {
+            try {
+                role = UserRole.valueOf(signupReq.getRole().toUpperCase());
+            } catch (Exception ignored) {}
+        }
+        user.setUserRole(role);
         user.setPassword(bCryptPasswordEncoder.encode(signupReq.getPassword()));
         User createdUser = userRepository.save(user);
         return createdUser.getUserDTO();
