@@ -1,4 +1,5 @@
 <nz-layout>
+  @if (!isAdminLoggedIn && !isCustomerLoggedIn) {
   <nz-sider nzCollapsible nzWidth="200px">
     <div class="logo"></div>
     <ul nz-menu nzTheme="dark" nzMode="inline">
@@ -9,9 +10,50 @@
       <li nz-menu-item routerLink="/login">
         <span nz-icon nzType="login"></span>
         <span><strong>Login</strong></span>
-      </li> 
+      </li>
     </ul>
   </nz-sider>
+  } @if (isAdminLoggedIn) {
+  <nz-sider nzCollapsible nzWidth="200px">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="/admin/dashboard">
+        <span nz-icon nzType="dashboard"></span>
+        <span><strong>DashBoard</strong></span>
+      </li>
+      <li nz-menu-item routerLink="/admin/rooms">
+        <span nz-icon nzType="apartment"></span>
+        <span><strong>Rooms</strong></span>
+      </li>
+      <li nz-menu-item routerLink="/admin/reservations">
+        <span nz-icon nzType="pull-request"></span>
+        <span><strong>Reservation</strong></span>
+      </li>
+      <li nz-menu-item (click)="logOut()">
+        <span nz-icon nzType="logout"></span>
+        <span><strong>Logout</strong></span>
+      </li>
+    </ul>
+  </nz-sider>
+  } @if (isCustomerLoggedIn) {
+  <nz-sider nzCollapsible nzWidth="200px">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="/customers/rooms">
+        <span nz-icon nzType="apartment"></span>
+        <span><strong>Rooms</strong></span>
+      </li>
+      <li nz-menu-item routerLink="/customers/bookings">
+        <span nz-icon nzType="pull-request"></span>
+        <span><strong>Reservation</strong></span>
+      </li>
+      <li nz-menu-item (click)="logOut()">
+        <span nz-icon nzType="logout"></span>
+        <span><strong>Logout</strong></span>
+      </li>
+    </ul>
+  </nz-sider>
+  }
   <nz-layout>
     <nz-content>
       <router-outlet></router-outlet>

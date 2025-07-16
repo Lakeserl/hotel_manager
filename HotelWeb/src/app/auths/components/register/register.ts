@@ -7,6 +7,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Auth } from '../../services/auth/auth';
 import { Router } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 function passwordMatchValidator(): ValidatorFn {
   return (group: AbstractControl): ValidationErrors | null => {
@@ -29,7 +31,7 @@ function passwordStrengthValidator(): ValidatorFn {
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, NzFormModule, NzInputModule, NzButtonModule],
+  imports: [ReactiveFormsModule, NzFormModule, NzInputModule, NzButtonModule, NzSelectModule],
   templateUrl: './register.html',
   styleUrl: './register.scss'
 })
@@ -50,7 +52,8 @@ export class Register implements OnInit {
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required, passwordStrengthValidator()]],
       confirmPassword: [null, Validators.required],
-      name: [null, Validators.required]
+      name: [null, Validators.required],
+      role: ['CUSTOMER', Validators.required]
     }, { validators: passwordMatchValidator() });
   }
 
@@ -78,7 +81,6 @@ export class Register implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        // Show backend error message if available
         const backendMsg = err?.error?.message || err?.error || 'Registration failed! Please try again.';
         this.message.error(backendMsg, { nzDuration: 5000 });
       }

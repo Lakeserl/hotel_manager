@@ -12,12 +12,14 @@ export class Auth {
 
   constructor(private http:HttpClient, private router: Router) { }
 
-  register(signupRequest:any):Observable<any>{
-    return this.http.post(BASIC_URL + "api/auth/signup", signupRequest);
+  register(data: any) {
+    // Đảm bảo gửi cả role lên backend
+    return this.http.post<any>(BASIC_URL + 'api/auth/signup', data);
   }
 
-  login(loginRequest: any):Observable<any>{
-    return this.http.post(BASIC_URL + "api/auth/login", loginRequest);
+  login(data: any) {
+    // Đảm bảo gửi cả role lên backend
+    return this.http.post<any>(BASIC_URL + 'api/auth/login', data);
   }
 
   isAuthenticated(): boolean {
